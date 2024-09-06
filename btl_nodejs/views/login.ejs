@@ -1,0 +1,50 @@
+<%- include('partials/head') %>
+
+  <body class="img js-fullheight" style="background-image: url(/images/h3.jpg);">
+    <section class="section-one">
+      <div class="container">
+        <div class="row justify-content-center animate__animated animate__fadeInDown">
+          <div class="col-md-12 text-center mb-5">
+            <div class="inner-head">
+              <h1 class="inner-title kanit-bold">PTIT POOD</h1>
+              <h2 class="inner-desc kanit-medium">ĐỈNH CAO ẨM THỰC</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center animate__animated animate__fadeInUp">
+          <div class="col-md-6 col-lg-4">
+            <div class="login-wrap p-0">
+              <h3 class="mb-4 text-center kanit-medium">Đăng Nhập</h3>
+              <form id="customer_login" method="POST" novalidate="novalidate" action="/login" class="signin-form">
+                <div class="form-group">
+                  <input name="username" type="text" class="form-control" placeholder="Tên đăng nhập" required>
+
+                </div>
+                <div class="form-group">
+                  <input name="password" id="password-field" type="password" class="form-control" placeholder="Mật khẩu"
+                    required>
+
+                </div>
+                <div class="form-group">
+
+                  <button name="dangnhap" type="submit" class="form-control btn kanit-medium">Đăng Nhập</button>
+                </div>
+                <div class="form-group ">
+                  <div class="inner-pass">
+                    <a href="/" style="color:#ffffff;text-decoration:none;float:left">Trang chủ</a>
+                    <a href="register" style="color:#ffffff;text-decoration:none">Đăng ký</a>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-QGIlPGuxW8Sgw4ZZctEwNR6qqJc2F2lgSybmhswDgQcP9K5Q2fKpjGvm6jGI9QbQ"
+      crossorigin="anonymous"></script>
+  </body>
+
+  </html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>Trang Chủ</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="vendor/animate.css/animate.min.css" rel="stylesheet" />
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+  <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+  <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+  <link href="css/styleHome.css" rel="stylesheet" />
+</head>
+<style>
+
+</style>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+      <div class="logo">
+        <h1>
+          <a href="index.html"><span>PTIT</span> FOOD</a>
+        </h1>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/">Trang Chủ</a></li>
+         
+          <li><a class="nav-link scrollto" href="#contact">Giỏ hàng</a></li>
+          
+          <% if (!isAuthenticated) { %>
+            <li><a class="nav-link scrollto" href="/login">Đăng Nhập</a></li>
+          <% } else { %>
+            <li>
+              <a class="nav-link scrollto" href="/profile">Trang cá nhân</a>
+            </li>
+            <!-- Hiển thị nút khác nếu đã đăng nhập, ví dụ nút Đăng Xuất -->
+            <li><a class="nav-link scrollto" href="/logout">Đăng Xuất</a></li>
+          <% } %>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+      <!-- .navbar -->
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <!-- ======= hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2000">
+        <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+          <div class="carousel-item active" style="
+                background-image: url(https://th.bing.com/th/id/OIP.p3wUzk8vT0bWz11JnZD21AHaEc?rs=1&pid=ImgDetMain);
+              ">
+            <div class="carousel-container">
+              <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">
+                  Thiên Đường Bánh Ngọt
+                </h2>
+                <p class="animate__animated animate__fadeInUp">
+                  Ngọt Ngào Từ Từng Chiếc Bánh, Hạnh Phúc Từ Từng Khoảnh Khắc
+                </p>
+                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Mua Ngay</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item" style="
+                background-image: url(https://th.bing.com/th/id/OIP.uxHnPpJPi5TIbWFFd3kCHwHaGN?rs=1&pid=ImgDetMain);
+              ">
+            <div class="carousel-container">
+              <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">
+                  Vị Ngọt Yêu Thương
+                </h2>
+                <p class="animate__animated animate__fadeInUp">
+                  Hương Vị Đam Mê, Ngọt Ngào Yêu Thương
+                </p>
+                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Mua Ngay</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item" style="
+                background-image: url(https://th.bing.com/th/id/OIP.j1-YE4pxsfdiDWyHvjQo8gHaEc?rs=1&pid=ImgDetMain);
+              ">
+            <div class="carousel-container">
+              <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">
+                  Bánh Ngon - Tình Đậm
+                </h2>
+                <p class="animate__animated animate__fadeInUp">
+                  Bánh Ngon Đậm Vị, Ngọt Ngào Trọn Tình
+                </p>
+                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Mua Ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- End Hero Section -->
+
+  <section id="about" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Sản Phẩm</h2>
+      <div class="row g-4 mb-5">
+        <% product.forEach((item)=> { %>
+          <div class="col-md-3" id="item-<%= item.product_id %>">
+            <div class="card product-card">
+              <img src="<%= item.image %>" width="100%" height="300px" style="object-fit: cover; border-radius: 8px"
+                class="card-img-top" alt="<%= item.product_name %>" />
+              <div class="card-body">
+                <h5 class="text-center">
+                  <%= item.product_name %>
+                </h5>
+                <p class="card-text" style="text-align: justify;">
+                  <%= item.descrip %>
+                </p>
+                <p class="text-center">
+                  <del>
+                    <%= item.price %>
+                  </del>
+                  <span class="discount-label text-center ">-<%= item.discount %>%</span>
+                </p>
+                <div class="d-flex justify-content-center">
+                  <p class="current-price text-center">
+                    <%= (item.price * (100 - item.discount) / 100)%>
+                  </p>
+                </div>
+                <div class="quantity-container">
+                  <button class="btn-get-started" style="border:0; padding:5px 10px"
+                    onclick="decreaseQuantity('<%= item.product_id %>')">-</button>
+                  <input style="width: 30px;"type="number" id="quantity-input-<%= item.product_id %>" value="1" min="1" readonly>
+                  <button class="btn-get-started" style="border:0; padding:5px 10px"
+                    onclick="increaseQuantity('<%= item.product_id %>')">+</button>
+                </div>
+                <p class="text-center">
+                  <a href="#" class="btn-get-started animate__animated animate__fadeInUp">Thêm vào giỏ hàng</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Footer ======= -->
+  <footer>
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-2">
+            <div class="footer-content">
+              <div class="footer-head">
+                <div class="footer-logo">
+                  <h2><span>PTIT</span>FOOD</h2>
+                </div>
+
+                <p style="text-align: justify;">
+                  Chúng tôi là một cửa hàng bánh ngọt tại PTIT. Tại PTIT FOOD, mỗi chiếc bánh đều được làm thủ công với
+                  sự tỉ mỉ và đam mê, mang đến hương vị ngọt ngào, độc đáo. Hãy để chúng tôi biến mỗi khoảnh khắc của
+                  bạn trở nên đặc biệt hơn với hương vị từ PTIT FOOD
+                </p>
+                <div class="footer-icons">
+                  <ul>
+                    <li>
+                      <a href="#"><i class="bi bi-facebook"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="bi bi-twitter"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="bi bi-instagram"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-xl-4">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>FaceBook</h4>
+                <iframe
+                  src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fsomedia.vn.2016&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                  width="340" height="300" style="border: none; overflow: hidden" scrolling="no" frameborder="0"
+                  allowfullscreen="true"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-xl-6">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>Youtobe</h4>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/DFsnYXtRveI?si=VRtoS0lLQeVrjBHC"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-area-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="copyright text-center">
+              <p>
+                &copy; Copyright <strong>PTIT FOOD</strong>. All Rights
+                Reserved
+              </p>
+            </div>
+            <div class="credits">
+              Designed by
+              <a href="/">PhuongNgo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End  Footer -->
+
+  <!-- Vendor JS Files -->
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script src="js/main.js"></script>
+</body>
+<script>
+  function increaseQuantity(productId) {
+    const quantityInput = document.getElementById(`quantity-input-${productId}`);
+    let currentQuantity = parseInt(quantityInput.value);
+    quantityInput.value = currentQuantity + 1;
+  }
+
+  function decreaseQuantity(productId) {
+    const quantityInput = document.getElementById(`quantity-input-${productId}`);
+    let currentQuantity = parseInt(quantityInput.value);
+    if (currentQuantity > 1) {
+      quantityInput.value = currentQuantity - 1;
+    }
+  }
+</script>
+
+</html>

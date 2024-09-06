@@ -1,0 +1,91 @@
+<%- include('partials/head') %>
+
+    <body class="img js-fullheight" style="background-image: url(/images/h3.jpg);">
+
+        <section class="section-one">
+            <div class="container">
+                <div class="row justify-content-center animate__animated animate__fadeInDown">
+                    <div class="col-md-12 text-center mb-5">
+                        <div class="inner-head">
+                            <h1 class="inner-title kanit-bold">PTIT POOD</h1>
+                            <h2 class="inner-desc kanit-medium">ĐỈNH CAO ẨM THỰC</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center animate__animated animate__fadeInUp">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="login-wrap p-0">
+                            <h3 class="mb-4 text-center kanit-medium">Đăng ký </h3>
+                            <form method="post" action="/register" class="signin-form">
+                                <%if (message !="undefined" ) { %>
+                                    <div class="form-control  mb-2 d-flex text-center justify-content-center"
+                                        style=" background-color: #FFCCCC; font-weight: bold; color : rgb(210, 29, 29)">
+                                        <%= message %>
+                                    </div>
+                                    <% } %>
+                                        <div class="form-group mb-2">
+                                            <input name="username" type="text" class="form-control"
+                                                placeholder="Tên đăng nhập" required>
+
+                                        </div>
+
+
+                                        <div class="form-group mb-2">
+                                            <input name="password" id="password-field" type="password"
+                                                class="form-control" placeholder="Mật khẩu" required>
+
+                                        </div>
+
+                                        <div class="form-group mb-2">
+                                            <input name="password2" id="password-field" type="password"
+                                                class="form-control" placeholder="Nhập lại mật khẩu " required>
+
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <input name="address" type="text" class="form-control" placeholder="Địa chỉ"
+                                                required>
+
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <input name="phone_number" type="text" class="form-control"
+                                                placeholder="Số điện thoại" required>
+
+                                        </div>
+                                        <div class="form-group mb-2 ">
+
+                                            <select class="form-control" name="sex" required>
+
+                                                <option value="Nam">---Chọn giới tính---</option>
+
+                                                <option value="Nam">Nam</option>
+
+                                                <option value="Nữ">Nữ</option>
+
+                                            </select>
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <!-- <p><?php check_message() ?></p> -->
+                                            <button name="doimaukhau" type="submit"
+                                                class="form-control btn kanit-medium">Đăng ký</button>
+                                        </div>
+                                        <div class="form-group ">
+                                            <div class="inner-pass">
+                                                <a href="login"
+                                                    style="color:#ffffff;text-decoration:none;float:left">Đăng nhập</a>
+                                                <a href="change" style="color:#ffffff;text-decoration:none">Đổi mật khẩu</a>
+                                            </div>
+                                        </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+
+    </html>

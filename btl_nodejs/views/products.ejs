@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTIT FOOD</title>
+    <style>
+        .product {
+            margin: 20px;
+        }
+        .cart-btn, .purchase-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="product">
+        <h2>Sản phẩm 1</h2>
+        <input type="number" id="quantity-1" value="1" min="1">
+        <button class="cart-btn" onclick="addToCart('Sản phẩm 1', 1)">Thêm vào giỏ hàng</button>
+    </div>
+
+    <div class="product">
+        <h2>Sản phẩm 2</h2>
+        <input type="number" id="quantity-2" value="1" min="1">
+        <button class="cart-btn" onclick="addToCart('Sản phẩm 2', 2)">Thêm vào giỏ hàng</button>
+    </div>
+
+    <button class="purchase-btn" onclick="showCart()">Mua hàng</button>
+
+    <script>
+        let cart = [];
+
+        function addToCart(productName, productId) {
+            const quantity = parseInt(document.getElementById(`quantity-${productId}`).value);
+            const existingProduct = cart.find(item => item.name === productName);
+
+            if (existingProduct) {
+                existingProduct.quantity += quantity;
+            } else {
+                cart.push({ name: productName, quantity: quantity });
+            }
+            alert(`${productName} đã được thêm vào giỏ hàng!`);
+        }
+
+        function showCart() {
+            if (cart.length === 0) {
+                alert('Giỏ hàng trống!');
+                return;
+            }
+
+            let cartItems = 'Các sản phẩm trong giỏ hàng:\n';
+            cart.forEach(item => {
+                cartItems += `- ${item.name}: ${item.quantity}\n`;
+            });
+
+            alert(cartItems);
+        }
+    </script>
+
+</body>
+</html>

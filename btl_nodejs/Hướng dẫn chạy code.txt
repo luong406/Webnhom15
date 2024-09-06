@@ -1,0 +1,11 @@
+1. Trong MYSQL
+Copy câu lệnh trong file: csdl non-final chạy.
+
+2. Trong VS Code
+- Chạy npm-i để cài đặt các thư viện.
+- Vào file dbConfig trong thư mục configs thay đổi thông tin USER, PASSWORD đúng với ở trong MySQL của máy.
+- Chạy code: node index.js
+
+3. Tạo người dùng
+- Sau khi chạy code thì sẽ có các đường dẫn như: http://localhost:3000/, http://localhost:3000/login, http://localhost:3000/register
+- Vào http://localhost:3000/register để tạo tài khoản và login
