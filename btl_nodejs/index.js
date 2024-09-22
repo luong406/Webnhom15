@@ -16,7 +16,7 @@ app.use(
     secret: 'your-secret-key', // Chuỗi bí mật để ký session ID cookie
     resave: false,              // Không lưu lại session nếu không thay đổi
     saveUninitialized: true,    // Lưu session mới dù chưa có dữ liệu
-    cookie: { maxAge: 60000 }   // Đặt thời gian hết hạn cookie (miliseconds)
+    cookie: { maxAge: 600000000 }   // Đặt thời gian hết hạn cookie (miliseconds)
   })
 );
 

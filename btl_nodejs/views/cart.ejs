@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>Trang Chủ</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="vendor/animate.css/animate.min.css" rel="stylesheet" />
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+  <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+  <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+  <link href="css/styleHome.css" rel="stylesheet" />
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .cart-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .cart-header h1 {
+    font-size: 2rem;
+    color: #333;
+  }
+
+  .cart-header span {
+    color: #ee4d2d;
+    font-size: 1.5rem;
+  }
+
+  .cart-items {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  .cart-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+  }
+
+  .item-info h3 {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+  }
+
+  .item-info p {
+    font-size: 0.9rem;
+    color: #888;
+  }
+
+  .item-price,
+  .item-total {
+    font-size: 1.1rem;
+    color: #333;
+    min-width: 100px;
+    text-align: center;
+  }
+
+  .item-quantity {
+    display: flex;
+    align-items: center;
+  }
+
+  .item-quantity button {
+    width: 30px;
+    height: 30px;
+    background-color: #eee;
+    border: none;
+    cursor: pointer;
+  }
+
+  .item-quantity input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin: 0 5px;
+  }
+
+  .item-remove {
+    background-color: #ee4d2d;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .item-remove:hover {
+    background-color: #d43a1d;
+  }
+
+  .cart-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .cart-summary .total-items {
+    font-size: 1.2rem;
+    color: #333;
+  }
+
+  .checkout-btn {
+    background-color: #ee4d2d;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+
+  .checkout-btn:hover {
+    background-color: #d43a1d;
+  }
+</style>
+
+<body>
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+      <div class="logo">
+        <h1>
+          <a href="/"><span>PTIT</span> FOOD</a>
+        </h1>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/">Trang Chủ</a></li>
+
+          <li><a class="nav-link scrollto" href="#contact">Giỏ hàng</a></li>
+
+          <% if (!isAuthenticated) { %>
+            <li><a class="nav-link scrollto" href="/login">Đăng Nhập</a></li>
+            <% } else { %>
+              <li>
+                <a class="nav-link scrollto" href="/profile">Trang cá nhân</a>
+              </li>
+              <!-- Hiển thị nút khác nếu đã đăng nhập, ví dụ nút Đăng Xuất -->
+              <li><a class="nav-link scrollto" href="/logout">Đăng Xuất</a></li>
+              <% } %>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+      <!-- .navbar -->
+    </div>
+  </header>
+  <div class="container ">
+    <div class="cart-header">
+      <h1>Giỏ hàng của bạn</h1>
+    </div>
+
+    <div class="cart-items">
+      <% if (products.length> 0) { %>
+        <% products.forEach(product=> { %>
+          <div class="cart-item">
+
+            <img src="<%= product.image %>" alt="Product Image">
+            <div class="item-info">
+              <h3>
+                <%= product.product_name %>
+              </h3>
+              <p>Phân loại: <%= product.descrip %>
+              </p>
+            </div>
+            <div class="item-price" id="price-<%= product.product_id %>">
+              <%= product.price.toLocaleString() %>₫
+            </div>
+            <div class="item-quantity">
+              <button class="decrease" onclick="decreaseQuantity('<%= product.product_id %>')">-</button>
+              <input type="text" id="quantity-input-<%= product.product_id %>" value="1" min="1">
+              <button class="increase" onclick="increaseQuantity('<%= product.product_id %>')">+</button>
+            </div>
+            <div class="item-total" id="total-<%= product.product_id %>">
+              <%= product.price.toLocaleString() %>₫
+            </div>
+            <button class="item-remove">Xóa</button>
+          </div>
+          <% }) %>
+            <% } else { %>
+              <p>Giỏ hàng trống</p>
+              <% } %>
+    </div>
+
+    <div class="cart-summary">
+      <div class="total-items">Tổng: <strong>0₫</strong></div>
+      <a class="checkout-btn" href="order" onclick="order()">Mua hàng</a>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-2">
+            <div class="footer-content">
+              <div class="footer-head">
+                <div class="footer-logo">
+                  <h2><span>PTIT</span>FOOD</h2>
+                </div>
+
+                <p style="text-align: justify;">
+                  Chúng tôi là một cửa hàng bánh ngọt tại PTIT. Tại PTIT FOOD, mỗi chiếc bánh đều được làm thủ công với
+                  sự tỉ mỉ và đam mê, mang đến hương vị ngọt ngào, độc đáo. Hãy để chúng tôi biến mỗi khoảnh khắc của
+                  bạn trở nên đặc biệt hơn với hương vị từ PTIT FOOD
+                </p>
+                <div class="footer-icons">
+                  <ul>
+                    <li>
+                      <a href="#"><i class="bi bi-facebook"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="bi bi-twitter"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="bi bi-instagram"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-xl-4">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>FaceBook</h4>
+                <iframe
+                  src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fsomedia.vn.2016&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                  width="340" height="300" style="border: none; overflow: hidden" scrolling="no" frameborder="0"
+                  allowfullscreen="true"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-xl-6">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>Youtobe</h4>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/DFsnYXtRveI?si=VRtoS0lLQeVrjBHC"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-area-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="copyright text-center">
+              <p>
+                &copy; Copyright <strong>PTIT FOOD</strong>. All Rights
+                Reserved
+              </p>
+            </div>
+            <div class="credits">
+              Designed by
+              <a href="/">PhuongNgo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="cart.js"></script>
+</body>
+<script>
+  function increaseQuantity(productId) {
+    const quantityInput = document.getElementById(`quantity-input-${productId}`);
+    let currentQuantity = parseInt(quantityInput.value);
+    quantityInput.value = currentQuantity + 1;
+
+    // Thay thế dấu phẩy đúng cách
+    let price = parseInt(document.getElementById(`price-${productId}`).innerText.replace(/₫|,/g, ''));
+    let quantity = parseInt(quantityInput.value);
+    let total = quantity * price;
+
+    document.getElementById(`total-${productId}`).innerText = total.toLocaleString() + '₫';
+
+    // Cập nhật tổng giỏ hàng
+    updateCartTotal();
+  }
+
+  function decreaseQuantity(productId) {
+    const quantityInput = document.getElementById(`quantity-input-${productId}`);
+    let currentQuantity = parseInt(quantityInput.value);
+
+    if (currentQuantity > 1) {
+      quantityInput.value = currentQuantity - 1;
+    }
+
+    // Thay thế dấu phẩy đúng cách
+    let price = parseInt(document.getElementById(`price-${productId}`).innerText.replace(/₫|,/g, ''));
+    let quantity = parseInt(quantityInput.value);
+    let total = quantity * price;
+
+    document.getElementById(`total-${productId}`).innerText = total.toLocaleString() + '₫';
+
+    // Cập nhật tổng giỏ hàng
+    updateCartTotal();
+  }
+  function updateCartTotal() {
+    let total = 0;
+    document.querySelectorAll('.item-total').forEach(item => {
+      // Thay thế tất cả dấu phẩy trong số tiền để tính chính xác
+      total += parseInt(item.innerText.replace(/₫|,/g, ''));
+    });
+    console.log(total);
+    document.querySelector('.total-items strong').innerText = total.toLocaleString() + '₫';
+  }
+  function order() {
+    let orderItems = [];
+
+    document.querySelectorAll('.cart-item').forEach(item => {
+      let productId = item.querySelector('.item-quantity input').id.split('-')[2]; // Lấy product_id từ id của input
+      let quantity = parseInt(item.querySelector('.item-quantity input').value); // Lấy số lượng sản phẩm
+      let productPrice = parseInt(item.querySelector('.item-price').innerText.replace(/₫|,/g, '')); // Lấy giá sản phẩm
+
+      orderItems.push({
+        product_id: productId,
+        quantity: quantity,
+        price: productPrice
+      });
+    });
+
+    fetch('/add-to-order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ orderItems })
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Giỏ hàng hiện tại:', data.order); 
+      })
+      .catch(error => {
+        console.error('Lỗi khi thêm vào giỏ hàng:', error);
+      });
+
+    
+  }
+
+
+</script>
+
+</html>

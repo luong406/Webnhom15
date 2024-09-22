@@ -40,18 +40,18 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="/">Trang Chủ</a></li>
-         
-          <li><a class="nav-link scrollto" href="#contact">Giỏ hàng</a></li>
-          
+
+          <li><a class="nav-link scrollto" href="/cart">Giỏ hàng</a></li>
+
           <% if (!isAuthenticated) { %>
             <li><a class="nav-link scrollto" href="/login">Đăng Nhập</a></li>
-          <% } else { %>
-            <li>
-              <a class="nav-link scrollto" href="/profile">Trang cá nhân</a>
-            </li>
-            <!-- Hiển thị nút khác nếu đã đăng nhập, ví dụ nút Đăng Xuất -->
-            <li><a class="nav-link scrollto" href="/logout">Đăng Xuất</a></li>
-          <% } %>
+            <% } else { %>
+              <li>
+                <a class="nav-link scrollto" href="/profile">Trang cá nhân</a>
+              </li>
+              <!-- Hiển thị nút khác nếu đã đăng nhập, ví dụ nút Đăng Xuất -->
+              <li><a class="nav-link scrollto" href="/logout">Đăng Xuất</a></li>
+              <% } %>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
@@ -154,16 +154,14 @@
                   <p class="current-price text-center">
                     <%= (item.price * (100 - item.discount) / 100)%>
                   </p>
+
                 </div>
-                <div class="quantity-container">
-                  <button class="btn-get-started" style="border:0; padding:5px 10px"
-                    onclick="decreaseQuantity('<%= item.product_id %>')">-</button>
-                  <input style="width: 30px;"type="number" id="quantity-input-<%= item.product_id %>" value="1" min="1" readonly>
-                  <button class="btn-get-started" style="border:0; padding:5px 10px"
-                    onclick="increaseQuantity('<%= item.product_id %>')">+</button>
-                </div>
+                <p class="card-text d-flex justify-content-center" style="text-align: justify;">
+                  Số lượng còn <%= item.quantity %> cái
+                </p>
                 <p class="text-center">
-                  <a href="#" class="btn-get-started animate__animated animate__fadeInUp">Thêm vào giỏ hàng</a>
+                  <a href="" class="btn-get-started animate__animated animate__fadeInUp "
+                    onclick="addToCart('<%= item.product_id %>')">Thêm vào giỏ hàng</a>
                 </p>
               </div>
             </div>
@@ -264,19 +262,25 @@
   <script src="js/main.js"></script>
 </body>
 <script>
-  function increaseQuantity(productId) {
-    const quantityInput = document.getElementById(`quantity-input-${productId}`);
-    let currentQuantity = parseInt(quantityInput.value);
-    quantityInput.value = currentQuantity + 1;
+  function addToCart(productId) {
+    fetch('/add-to-cart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"productId":parseInt(productId)})
+    })
+      .then(response => response.json())
+      .then(data => {
+         // Hiển thị thông báo khi thêm sản phẩm thành công
+        console.log('Giỏ hàng hiện tại:', data.cart); 
+         alert(data.message); // Kiểm tra giỏ hàng trong console
+      })
+      .catch(error => {
+        console.error('Lỗi khi thêm vào giỏ hàng:', error);
+      });
   }
 
-  function decreaseQuantity(productId) {
-    const quantityInput = document.getElementById(`quantity-input-${productId}`);
-    let currentQuantity = parseInt(quantityInput.value);
-    if (currentQuantity > 1) {
-      quantityInput.value = currentQuantity - 1;
-    }
-  }
 </script>
 
 </html>

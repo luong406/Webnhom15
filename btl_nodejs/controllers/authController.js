@@ -17,11 +17,11 @@ exports.getLogin = (req, res, next) => {
 // Controller xử lý logout
 exports.getLogout = (req, res, next) => {
   // Sử dụng req.logout() để đăng xuất người dùng
+
   req.logOut();
       res.redirect("/login"); // Đảm bảo đường dẫn không gây redirect lặp
    
 };
-
 
 exports.getChange = (req, res, next) => {
   const message = req.flash("error")[0];

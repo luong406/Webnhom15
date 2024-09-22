@@ -11,7 +11,7 @@ module.exports = function (passport) {
   passport.deserializeUser((user, done) => {
     User.findUserById(user.user_id)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         done(null, result);
       })
       .catch((error) => {
@@ -25,7 +25,7 @@ module.exports = function (passport) {
     new LocalStrategy(function(username, password, done) {
       User.findUserByUsername(username)
       .then((user) => {
-        console.log(user);
+        // console.log(user);
         if (!user) {
           return done(null, false, {
             message: 'Sai tên đăng nhập hoặc mật khẩu.'
