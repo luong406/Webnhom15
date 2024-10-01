@@ -13,7 +13,8 @@ router.get("/register", authController.getRegister);
 router.post("/register", authController.postRegister);
 
 router.get('/logout',authController.getLogout);
-router.get('/admin/:user_id', authController.getUser);
+router.get('/admin/user/:user_id', authController.getUser);
+router.delete('/admin/user/:user_id', authController.deleteUser);
 router.post('/add-to-cart', productController.addCart);
 router.post('/add-to-order', productController.addOrder);
 router.get('/order', productController.getOrder);
