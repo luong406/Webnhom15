@@ -10,7 +10,8 @@ exports.getLogin = (req, res, next) => {
   } else {
     if (req.session.passport.user.role == 1) {
       res.redirect("/admin/home");
-    } else res.redirect("/");
+    } 
+    else res.redirect("/");
   }
 };
 

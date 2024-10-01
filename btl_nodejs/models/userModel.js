@@ -32,6 +32,18 @@ const createUser = (username, password, address, phone_number, sex, role) => {
       throw error;
     });
 };
+const getUser = (user_id) => {
+  return db
+    .query("SELECT * FROM users WHERE user_id = ?", [user_id])
+    .then((result) => {
+      return result[0]; // kết quả truy vấn
+    })
+    .catch((error) => {
+      console.error("Error fetching user:", error);
+      throw error;
+    });
+};
+
 
 module.exports = {
   findUserById,

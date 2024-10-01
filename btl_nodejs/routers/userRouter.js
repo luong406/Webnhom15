@@ -13,9 +13,10 @@ router.get("/register", authController.getRegister);
 router.post("/register", authController.postRegister);
 
 router.get('/logout',authController.getLogout);
-
+router.get('/admin/:user_id', authController.getUser);
 router.post('/add-to-cart', productController.addCart);
 router.post('/add-to-order', productController.addOrder);
 router.get('/order', productController.getOrder);
 router.post('/order', productController.submitOrder);
+
 module.exports = router;

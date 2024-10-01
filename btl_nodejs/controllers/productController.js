@@ -179,3 +179,56 @@ const checkProducts = async (products) => {
   }
   return true; // Tất cả sản phẩm đủ số lượng
 };
+exports.addProduct = (req, res) =>{
+  console.log(req.body);
+  Product.createProduct(req.body.product_name, req.body.price, req.body.discrip, req.body.image, req.body.discount, req.body.quantity)
+  .then(result =>{
+    console.log("Thanh cong");
+    res.status(201).json({
+      message: "Sản phẩm đã được tạo thành công!",
+      product: req.body
+    });
+  })
+  .catch(err =>{
+    console.log("That bai do loi db, truyen thieu du lieu");
+    res.status(500).json({
+      message: "Thêm sản phẩm thất bại!",
+      error: err
+    });
+  });
+}
+exports.deleteProduct=(req,res) =>{
+  console.log(req.params.product_id);
+  Product.deleteProduct(req.params.product_id)
+  .then(result =>{
+    res.status(201).json({
+      message:"Xoa san pham thanh cong!",
+      product: req.params.product_id
+    });
+  })
+  .catch(err =>{
+    console.log ("Xoa that bai");
+    res.status(500).json({
+      message:"Xoa lai di!",
+      error:err
+    });
+  });
+}
+  exports.getProduct=(req,res) =>{
+    console.log(req.params.product_id);
+    Product.getProduct(req.params.product_id)
+    .then(result =>{
+      res.status(201).json({
+        message:"Hien thi san pham!",
+        product: result[0]
+      });
+    })
+    .catch(err =>{
+      console.log ("Khong tim thay san pham");
+      res.status(500).json({
+        message:"Tim lai di!",
+        error:err
+      });
+    });
+};
+
